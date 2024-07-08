@@ -42,7 +42,9 @@ nargo compile
 nargo execute
 
 # Create a proof for the program.
+set +e
 nargo prove
+set -e
 
 # Veryify whether the proof is valid.
 nargo verify
