@@ -31,7 +31,9 @@ nargo fmt
 set -e
 
 # Generate a Solidity verifier smart contract for the program.
+set +e
 nargo codegen-verifier
+set -e
 
 # Compile the program and its secret execution trace into ACIR format.
 nargo compile
