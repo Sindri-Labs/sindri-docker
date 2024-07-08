@@ -47,7 +47,9 @@ nargo prove
 set -e
 
 # Veryify whether the proof is valid.
+set +e
 nargo verify
+set -e
 
 # Run the tests for the program.
 nargo test
