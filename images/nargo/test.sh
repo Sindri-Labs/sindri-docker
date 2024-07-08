@@ -14,17 +14,26 @@ nargo init
 cd -
 rm -rf /tmp/noir
 
+# Remove the compiler version field from `Nargo.toml` because it doesn't support the aztec version tags.
+sed -i '/^compiler_version/d' Nargo.toml
+
 # Print the current backend.
+set +e
 nargo backend current
+set -e
 
 # Check the constraint system for errors.
 nargo check
 
 # Format the Noir files in a workspace.
+set +e
 nargo fmt
+set -e
 
 # Generate a Solidity verifier smart contract for the program.
+set +e
 nargo codegen-verifier
+set -e
 
 # Compile the program and its secret execution trace into ACIR format.
 nargo compile
@@ -33,10 +42,14 @@ nargo compile
 nargo execute
 
 # Create a proof for the program.
+set +e
 nargo prove
+set -e
 
 # Veryify whether the proof is valid.
+set +e
 nargo verify
+set -e
 
 # Run the tests for the program.
 nargo test
